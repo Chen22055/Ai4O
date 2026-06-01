@@ -1,0 +1,55 @@
+# 本配置文件用于自定义任意相位光场输入。
+# 后续你可以在这里选择相位来源：解析表达式、外部图像/数组文件、程序生成的相位图，
+# 并配置入射振幅、波长、采样网格、后续传播距离、光学器件序列和输出路径。
+
+simulation:
+  name: custom_phase_field
+  wavelength: 532e-9
+  unit: meter
+
+grid:
+  shape: [1024, 1024]
+  pixel_pitch: 6.4e-6
+  center: [0.0, 0.0]
+
+input_field:
+  # complex field convention: U(x, y) = amplitude(x, y) * exp(1j * phase(x, y))
+  amplitude:
+    type: constant
+    value: 1.0
+
+  phase:
+    # 可选类型：
+    # - analytic: 使用解析表达式生成相位
+    # - image: 从灰度图读取相位并映射到指定范围
+    # - numpy: 从 .npy/.npz 文件读取相位数组
+    # - builtin: 使用程序内置相位图案，例如 grating、lens、vortex、random
+    type: analytic
+
+    # analytic 模式示例。表达式约定使用 x, y, X, Y, pi 等变量。
+    # 当前只是配置模板，真正的安全解析逻辑需要后续在代码中实现。
+    expression: "0.0"
+
+    # image/numpy 模式使用。
+    path: null
+
+    # 将输入图像或数组的数值范围映射到相位范围。
+    phase_range: [0.0, 6.283185307179586]
+
+    # builtin 模式使用。
+    builtin_name: null
+    builtin_params: {}
+
+optical_system:
+  # 后续由 system.py 读取并按顺序构造光路。
+  elements:
+    - type: free_space
+      distance: 0.1
+      propagator: angular_spectrum
+
+output:
+  save_dir: OpticsSimulation/outputs/custom_phase_field
+  save_intensity: true
+  save_phase: true
+  save_complex_field: false
+  save_intermediate_fields: false

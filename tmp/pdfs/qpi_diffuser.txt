@@ -1,0 +1,1242 @@
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                    Official journal of the JHL 2689-9620
+https://doi.org/10.37188/lam.2023.017                                                                                                     www.light-am.com
+
+
+
+
+    Article                                                                                                                     Open Access
+
+
+Quantitative phase imaging (QPI) through
+random diffusers using a diffractive optical
+network
+Yuhang Li1,2,3 , Yi Luo1,2,3, Deniz Mengu1,2,3, Bijie Bai1,2,3 and Aydogan Ozcan1,2,3,*
+
+
+    Abstract
+    Quantitative phase imaging (QPI) is a label-free computational imaging technique used in various fields, including
+    biology and medical research. Modern QPI systems typically rely on digital processing using iterative algorithms for
+    phase retrieval and image reconstruction. Here, we report a diffractive optical network trained to convert the phase
+    information of input objects positioned behind random diffusers into intensity variations at the output plane, all-
+    optically performing phase recovery and quantitative imaging of phase objects completely hidden by unknown,
+    random phase diffusers. This QPI diffractive network is composed of successive diffractive layers, axially spanning in
+    total ~70λ , where λ is the illumination wavelength; unlike existing digital image reconstruction and phase retrieval
+    methods, it forms an all-optical processor that does not require external power beyond the illumination beam to
+    complete its QPI reconstruction at the speed of light propagation. This all-optical diffractive processor can provide
+    a low-power, high frame rate and compact alternative for quantitative imaging of phase objects through random,
+    unknown diffusers and can operate at different parts of the electromagnetic spectrum for various applications in
+    biomedical imaging and sensing. The presented QPI diffractive designs can be integrated onto the active area of
+    standard CCD/CMOS-based image sensors to convert an existing optical microscope into a diffractive QPI
+    microscope, performing phase recovery and image reconstruction on a chip through light diffraction within
+    passive structured layers.
+    Keywords: Quantitative phase imaging, Optical neural network, Diffractive deep neural network, Diffusive media,
+    All-optical computing
+
+
+
+Introduction                                                                          the use of chemical stains7 or fluorescent tags8 to bring
+   Imaging weakly scattering phase objects, such as cells,                            contrast to such weakly scattering microscopic features of
+has been an active research area for decades, with various                            objects, but these methods require complex sample
+solutions reported1–6 for applications in different fields,                           preparation steps, involving the use of exogenous labeling
+including biomedical sciences. One common approach is                                 agents, which might interfere with the normal
+                                                                                      physiological processes of specimens. Differential
+Correspondence: Aydogan Ozcan (ozcan@ucla.edu)                                        interference contrast (DIC) microscopy is another
+1
+  Electrical and Computer Engineering Department,                   University   of
+                                                                                      commonly used method, which can rapidly image optical
+California, Los Angeles, California 90095, USA
+2
+ Bioengineering    Department,      University   of   California,   Los   Angeles,
+                                                                                      path length changes in unstained samples, revealing the
+California 90095, USA                                                                 qualitative phase information9,10; however, it lacks a
+Full list of author information is available at the end of the article.               quantitative measurement of the optical phase distribution.
+
+© The Author(s) 2023
+                Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation,
+                distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a
+link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this article are included in the article′s
+Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the article′s Creative Commons license and
+your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder.
+To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                 Page 2 of 16
+
+
+
+
+Addressing the need for quantifying the phase shift             This diffractive network, after its training, generalizes to
+information of objects, quantitative phase imaging (QPI)        all-optically perform QPI through unknown random
+has become a powerful and widely used tool for non-             diffusers never seen before, without the need for a digital
+invasively imaging transparent specimens with high              image reconstruction algorithm. It has a compact axial
+sensitivity and resolution11. Over the last decades, various    thickness of ~70λ, and does not require any computing
+digital QPI techniques have been developed, such as             power except for the illumination light. The QPI D2NN
+Fourier Phase Microscopy (FPM)12, Digital Holographic           designs reported in this work can potentially be integrated
+Microscopy (DHM)3,13,14, Diffraction Phase Microscopy           with existing CCD/CMOS image sensors by fabricating the
+(DPM)15, Spatial Light Interference Microscopy (SLIM),16        resulting thin diffractive layers on top of the active area of
+among many others. Traditional QPI systems often require        an image sensor array. Such an on-chip integrated D2NN
+relatively large-scale computational resources for image        can be placed at the image plane of a standard microscope
+reconstruction and phase retrieval algorithms, which are        to convert it into a diffractive QPI microscope. This
+time-consuming, partially hindering the frame rate of these     diffractive computing framework for phase retrieval and
+computational imaging systems. Moreover, the majority of        QPI through random unknown diffusers can potentially
+these works did not consider random scattering media            advance label-free microscopy and sensing applications in
+within the optical path, which is especially prevalent in       biomedical sciences, among other fields.
+biological tissue17,18. On the other hand, some works
+addressed QPI through scattering media by, e.g.,                Results
+employing coherence-controlled holographic microscopy19,
+but the optical setups used in these cases remain relatively    Design of a diffractive optical network for QPI
+bulky. With the development and widespread use of deep          through random diffusers
+learning methods, recent works have also involved deep             Fig. 1a illustrates the schematic of a 4-layer QPI D2NN
+neural networks in QPI, significantly advancing the image       trained to all-optically recover the phase information of an
+reconstruction speed and the spatiotemporal throughput,         input phase object through unknown random phase
+also improving the image quality by levering machine            diffusers. To train this QPI diffractive network, phase-only
+learning and GPU-based computing6,20–31.                        objects with unit amplitude were randomly selected from
+   Recent research also presented an all-optical phase          the MNIST dataset and placed at 53.3λ in front of
+recovery and image reconstruction method for QPI using          randomly generated phase diffusers (see the Materials and
+diffractive deep neural networks (D2NN), enabling               methods section). The QPI diffractive network designed
+computer-free image reconstruction of phase objects at the      here was composed of four successive diffractive layers
+speed of light propagation through thin diffractive layers32.   with an axial distance of 2.67λ between them, and the
+A diffractive network is an all-optical machine learning        distance between the random diffuser plane and the first
+platform that computes a given task using light diffraction     diffractive layer was also 2.67λ. The output image plane
+through successive (passive) transmissive layers33–38, where    was designed to be 9.3λ away from the last diffractive
+each diffractive layer typically consists of tens of            layer, as shown in Fig .1b.
+thousands of diffractive units to modulate the phase and/or        We introduced multiple random diffusers in each
+amplitude of the incident light. Deep learning techniques,      training epoch to build the generalization capability for the
+such as error backpropagation and stochastic gradient           diffractive layers to quantitatively image phase objects
+descent, are used to optimize each layer's modulation           distorted by new random diffusers. We used the correlation
+values (e.g., transmission coefficients), mapping complex-      length (L) to characterize random diffusers in terms of their
+valued input fields containing the optical information of       effective grain size (see the Materials and methods
+interest onto desired output fields39–41.                       section), and all the random diffusers used in training and
+   In this work, we report the design of diffractive optical    blind testing were assumed to have the same correlation
+networks for phase recovery and quantitative phase              length (L = Ltrain = Ltest ), modeled as thin phase masks
+imaging through random unknown diffusers. Unlike some           (Fig. 1b). During the training phase, handwritten digit
+of the earlier work32,41, the presented QPI diffractive         samples were randomly selected from the MNIST dataset,
+network can convert the phase information of an input           and fed to the diffractive network, propagating through the
+sample into a quantitative output intensity distribution even   corresponding random diffuser and the successive
+in the presence of unknown, random phase diffusers, all-        diffractive layers to form the intensity profiles at the output
+optically revealing the quantitative phase images of the        plane. The design of our diffractive networks was based on
+samples that are completely covered by random diffusers.        numerical simulations in which phase-only objects, random
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                                                                                             Page 3 of 16
+
+
+
+
+            a                                                                                                                                                                            Ou
+                                                                                                                                                                                            tpu
+                                                                                                                                                                                               tp
+                                                                                                                                                                   rk                             lan
+                                                                                                                                                                wo                                   e
+                                                                                                                                                             net
+                                                                                                                                                        ve
+                                                                                                                                                 a  cti
+                                                                                                                                              ffr
+                                    Amplitude                                       Phase                                                 Di
+
+
+
+
+                                                                                                                                                                                                              Normalized
+                                                                                                                                                                                                               intensity
+                                                                            1                            π                                                                                                π
+                                                                                                                                         Ph                                                               0
+                                                                                                                                           ase
+                                                                                                                                                 dif
+                                                                                                                                                     fus
+                                                                                                               Inp                                      er
+                                                                                                                    ut
+                                                                                                                         pla
+                                                                                                                            ne
+                                                                                              15λ
+                                                                            0                            0
+                                                                                                                                                                            2π
+                                                                                                                                                                            0
+                                                                                                                                                               2π
+                                                                                                                                 15λ                           0
+
+
+
+            b                                                                       Diffractive layers                                    c                               Phase object
+                                      λ                                                                                                                                                                            π
+
+
+
+
+                                                                                                                                                                                                                       Phase
+            Uniform plane wave
+
+
+
+
+                                                           Phase diffuser
+
+
+
+
+                                                                                                                          Output plane
+                                          Phase object
+
+
+
+
+                                                                                                                                                                                                                   0
+                                                                                                                                                              Free space propagation output
+
+
+
+
+                                                         53.3λ              2.67λ         2.67λ              9.3λ
+                                                                                                                                                                        Ideal lens output
+
+
+
+
+                                                                                …
+
+                                                                                                                                                                    QPI network output                             π
+                                 Epoch 1                   Epoch 2                      Epoch 200
+
+
+
+                                                                                                                                                                                                                       Normalized
+                                                                                                                                                                                                                        intensity
+                           2π                                                                                 Testing
+                                                N=200n training diffusers                                    diffusers
+                           0
+                                                                                                                                                                                                         15λ
+                                                                                                                                                                                                                   0
+ Fig. 1 All-optical phase recovery and quantitative phase imaging through random unknown diffusers using a D2NN. a The schematic drawing of
+ the presented QPI D2NN, converting the phase information of an input object behind a random phase diffuser into a normalized intensity image,
+ which reveals the QPI information in radians without the use of a digital image reconstruction algorithm. b Optical layout and the training
+ schematic of the presented QPI diffractive networks. c Sample images showing the image distortion generated by random phase diffusers with
+ L = 14λ . Top: input phase objects. Second row: free space propagation (FSP) of the input objects through the diffusers, without the diffractive
+ layers. Third row: the input objects imaged by an aberration-free lens through the random diffuser. Fourth row: the QPI D2NN output.
+
+
+
+diffusers, and diffractive layers were modeled, and the free                                                         used/saw N = 200n different random diffusers, where n is
+space propagation of the optical fields was computed using                                                           the number of diffusers used in each epoch (e.g., n = 20
+the angular spectrum method (refer to the Materials and                                                              and N = 4000). After the training, which is a one-time
+methods section for details). The phase values of the                                                                effort, the converged QPI diffractive networks were
+diffractive features at each layer were adjusted through                                                             numerically tested by imaging unknown phase objects
+error backpropagation by minimizing the mean square                                                                  through new, unseen random diffusers, as shown in
+error (MSE) between the target QPI images and the                                                                    Fig. 1b, c.
+normalized output intensity profiles (see the Materials and                                                             Without loss of generality, all the QPI diffractive
+methods section). One epoch was completed when all the                                                               networks reported in this paper were designed with unit
+55,000 images in the MNIST dataset were used, and the                                                                magnification, i.e., the output intensity features have the
+training stopped after 200 epochs when the QPI D2NN                                                                  same scale as the input phase features; this is not a
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                 Page 4 of 16
+
+
+
+
+limitation since the thin QPI D2NN design (spanning 70λ          gratings with a linewidth of ~9.6λ were resolvable by our
+in thickness) can be placed at the magnified image plane of      QPI D2NN regardless of the grating direction and the
+a QPI microscope, by fabricating and integrating it on top       random phase diffuser used. Despite being trained using
+of the active area or the protective glass of the                only handwritten digits with relatively poor resolution, the
+CMOS/CCD-based imager chip. Since the output optical             QPI diffractive network was able to quantitatively
+intensity at the back-end of the diffractive network depends     reconstruct these phase gratings through unknown random
+on the power of the illumination source, the diffraction         diffusers, indicating that our diffractive model was
+efficiency of transmissive layers and the quantum                successful in approximating a general-purpose quantitative
+efficiency of the image sensor array, we defined a               phase imager. Its resolution can be further improved by
+reference region at the output plane, within which the mean      using training images that contain higher resolution,
+signal intensity was calculated to normalize the raw output      sharper features. Additional results of the QPI diffractive
+intensity of the QPI D2NN (see the Materials and methods         network for quantitatively reconstructing more complex
+section). After this normalization, the resulting output         images with higher resolution features can be found in
+intensity, denoted as IQPI (x, y) [rad], was used as the final   Fig. 4.
+quantitative phase image. This makes the QPI D2NN output            We also tested the same QPI D2NN network to image
+images independent of external factors such as the               distortion-free gratings by removing the random phase
+illumination beam intensity or the quantum efficiency of         diffusers in Fig. 1b while keeping all other components
+the image sensor used as part of the microscope design,          unchanged; this scheme is against our training which
+helping us quantitatively map the phase information of the       always used a random phase diffuser behind the input
+samples behind unknown diffusers into intensity signals.         plane. Despite deviating from its training configuration, the
+                                                                 QPI D2NN showed better image reconstruction quality
+All-optical phase recovery through random diffusers              when the random diffusers were removed, further
+using QPI diffractive networks                                   demonstrating that the diffractive network design
+   To demonstrate the all-optical phase recovery through         converged to a general-purpose quantitative phase imager,
+random unknown diffusers using QPI diffractive networks,         converting the phase information at the input plane into
+we used the samples from the MNIST dataset as phase-             quantitative intensity patterns at its output, with and
+only input objects and trained a 4-layer network with            without the presence of random phase diffusers.
+n = 20 random diffusers in each epoch, i.e., N = 4000               The input phase contrast is another factor affecting the
+random diffusers were used in total. To test the                 resolution achieved by our QPI diffractive network design.
+performance of the trained QPI D2NN model, we first used         To shed more light on this, we numerically evaluated our
+new hand-written digits from the test set that were never        QPI D2NN on binary phase gratings at varying levels of
+used during the training stage; these test objects were          input phase contrast (Fig. 3b); through this analysis, we
+individually distorted by n = 20 random diffusers used in        found out that the input phase gratings with a linewidth of
+the last training epoch (termed as known diffusers) as well      9.6λ remained resolvable even when the input phase
+as some newly generated diffusers that were never used           contrast was reduced to 0.25π . We also performed a similar
+during the training (termed as new diffusers), as shown in       phase contrast analysis using the test samples from the
+Fig. 2a. The resulting output images of the QPI diffractive      MNIST dataset to further examine the impact of the input
+network reveal its generalization performance for all-           phase contrast over the quality of the QPI reconstructions
+optical phase recovery and quantitative phase imaging of         created by the diffractive optical network trained with
+new test objects through new random phase diffusers that         αtrain = α = 1, as shown in Fig. 5a, where α denotes the
+were never seen before.                                          phase range [0, α · π] used for the training images. During
+   We further tested the same QPI D2NN, which was                the blind testing, the input phase contrast parameter (αtest )
+trained only with MNIST handwritten digits, using binary         was varied from 0.1 to 1.25, and the reconstructed D2NN
+phase gratings to quantify the smallest resolvable linewidth     images at the output plane were quantified using the
+and the phase sensitivity of the all-optical image               Pearson Correlation Coefficient (PCC) and the percent
+reconstructions through new random diffusers; see Fig. 3.        phase error (see the Materials and methods section).
+In this analysis, we varied the grating linewidth while          Fig. 5b, c illustrate the mean and the standard deviation of
+keeping the binary phase contrast as 0 − π ; each phase          the resulting PCC and the percent phase error values as a
+grating at the input plane was completely hidden behind          function of αtest , both of which peak at αtest = 0.75 rather
+random unknown phase diffusers as before. Our numerical          than αtest = 1; this is due to the continuous distribution of
+results reported in Fig. 3a show that 0 − π phase encoded        the phase values of the training images spanning
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                Page 5 of 16
+
+
+
+
+                           a                                     QPI diffractive network output
+                                                       Known diffusers                       New diffusers
+                                                                                                                   2π
+
+
+
+
+                                                                                                             15λ
+                                       Input                                                                       0
+
+
+
+
+                                   π                                                                               π
+
+
+
+
+                                                                                                                     Normalized
+                                                                                                                      intensity
+                           Phase
+
+
+
+
+                                                10λ                                                          10λ
+                                   0                                                                               0
+
+                                                                         Ideal lens output
+
+
+
+
+                                   π                                                                               π
+
+
+
+
+                                                                                                                     Normalized
+                                                                                                                      intensity
+                           Phase
+
+
+
+
+                                                10λ
+                                   0                                                                               0
+
+                           b           Layer1           Layer2                  Layer3              Layer4
+                                                                                                                        2π
+
+
+
+
+                                                                                                               10λ
+                                                                                                                        0
+ Fig. 2 Simulation results of the 4-layer QPI diffractive network for all-optical phase recovery through random diffusers. a QPI D2NN phase
+ recovery results through known and new random diffusers for phase-encoded handwritten digits ‘2’ and ‘4’ b The phase profiles of the trained
+ diffractive layers of the QPI D2NN. L = Ltrain = Ltest = 14λ .
+
+
+[0, αtrain · π]. There is a performance drop as αtest decreased              (red curves) as αtest varied from 0.1 to 1.25. As expected,
+to 0.1, suggesting that the trained QPI diffractive network                  Fig. 5b-d reveal that the performance of the same trained
+has difficulty separating the foreground and background                      diffractive QPI network (αtrain = 1) was much better when
+for smaller phase contrast input objects that are hidden                     the random diffusers were removed, further supporting that
+behind random unknown diffusers. On the other hand,                          the D2NN converged to a general-purpose quantitative
+when αtest increased to 1.25, beyond its training range                      phase imager, which is not only able to perform phase-to-
+αtrain = 1, the reconstructed image quality was still                        intensity transformations but is also resilient to structural
+acceptable, although some performance degradation                            distortions caused by random, unknown phase diffusers
+appears (Figs. 5b-d), demonstrating the capability of the                    hiding the input phase objects.
+QPI D2NN to generalize to input objects exceeding the
+phase contrast range used during the training stage.                         Impact of the number of diffractive layers
+   All these analyses reported above were performed using                       Through both theoretical and empirical evidence, it was
+phase-only input test objects that were completely hidden                    demonstrated that deeper diffractive optical networks
+behind random unknown phase diffusers with Ltest = 14λ .                     compute an arbitrary complex-valued linear transformation
+Next, we removed the random phase diffusers in Fig. 5a                       with lower approximation errors, and such deeper
+and tested the phase contrast performance of the same QPI                    diffractive architectures exhibit higher generalization
+D2NN to quantitatively image distortion-free phase-only                      capacity for all-optical statistical inference tasks39,40,42,43.
+objects; the results of this analysis are plotted in Fig. 5b, c              Similarly, we also analyzed the impact of the number (K)
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                             Page 6 of 16
+
+
+
+
+                           a                               Vertical grating                   Horizontal grating
+                                                   0       π
+
+
+
+
+                                           9.6λ
+                                                   15λ
+                                              π                                   π
+                                              0                                   0
+                         Linewidth
+
+                                           14.4λ
+
+
+
+                                              π                                   π
+                                              0                                   0
+                                                                                                                          π
+
+
+
+
+                                                                                                                           Normalized
+                                                                                                                            intensity
+                                           19.2λ
+
+
+
+
+                                              π                                   π                                       0
+                                              0                                   0
+                                                                                           New diffuser     No diffuser
+                           b                                Vertical grating                  Horizontal grating
+                                                   0     0.25π                        0     0.25π
+                                                                                                                          0.25π
+
+
+
+
+                                                                                                                                  Normalized
+                                                                                                                                   intensity
+                                                   15λ
+                                                                                                                          0
+                                          0.25π                                0.25π
+                                              0                                    0
+                                                   0     0.5π                       0        0.5π
+                                                                                                                          0.5π
+                         Linewidth 9.6λ
+
+
+
+
+                                                                                                                                  Normalized
+                                                                                                                                   intensity
+                                                                                                                          0
+                                           0.5π                                 0.5π
+                                              0                                    0
+                                                   0     0.75π                      0       0.75π
+                                                                                                                          0.75π
+
+
+
+                                                                                                                                  Normalized
+                                                                                                                                   intensity
+                                          0.75π                                0.75π                                      0
+                                              0                                    0
+
+ Fig. 3 Spatial resolution and phase sensitivity analyses of a diffractive QPI network, imaging through random diffusers. a Input phase and the
+ corresponding output QPI D2NN signal for binary (0 − π ) phase-encoded gratings with different linewidths. b Input phase and the corresponding
+ output signal of the QPI D2NN for binary phase-encoded gratings with different phase contrast values. L = Ltrain = Ltest = 14λ .
+
+
+of trainable diffractive layers on the all-optical phase                              Our results further reveal that, with the additional trainable
+recovery and QPI performance for imaging phase-only                                   diffractive layers available, the average PCC values in all
+objects through random unknown diffusers. Fig. 6a reports                             three cases (i.e., known, new and no diffusers) increase,
+the output images of the QPI diffractive networks through                             while the absolute phase errors decrease.
+known, new and no diffusers, where the known diffusers                                   Furthermore, we should emphasize that deeper
+refer to the random diffusers used in the last training                               diffractive architectures generally exhibit learning and
+epoch, and the new diffusers are the newly generated                                  inference advantages over shallower diffractive
+random diffusers, never seen before. Fig. 6b, c compare the                           architectures, even if the shallower architectures are made
+average PCC values and the absolute phase errors for the                              wider, as demonstrated in the literature for both spatially
+phase imaging of unknown test objects using diffractive                               coherent39 and spatially incoherent illumination44. For
+QPI networks designed with different K, showing that 2-                               example, a single phase-only diffractive layer that is much
+layer networks had relatively low PCC values and high                                 wider, including a total of T trainable diffractive features in
+phase error, and the imaging performance improved as we                               that layer, performs much worse in its output accuracy and
+increased the number of diffractive layers, K. This can also                          blind testing after training, compared to a deeper and
+be visualized in Fig. 6a, where the QPI results of the 2-                             narrower diffractive architecture that also includes the
+layer diffractive design are blurry with low contrast                                 same number of trainable diffractive features (T),
+compared to the results of the 6-layer diffractive design.                            distributed over K diffractive layers (with each layer
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                  Page 7 of 16
+
+
+
+
+                         a                                      QPI diffractive network output
+                                                      Known diffusers                            New diffusers
+                                                                                                                       2π
+
+
+
+
+                                                                                                                 15λ
+                                  Input                                                                                0
+
+
+
+
+                             π                                                                                         π
+
+
+
+
+                                                                                                                       Normalized
+                                                                                                                        intensity
+                        Phase
+
+
+
+
+                                          10λ                                                                    10λ
+                             0                                                                                         0
+
+                         b                                      QPI diffractive network output
+                                                     Known diffusers                     New diffusers
+                                                                                                                       2π
+
+
+
+
+                                                                                                                 15λ
+                                  Input                                                                                0
+
+
+
+
+                             π                                                                                         π
+
+
+
+
+                                                                                                                       Normalized
+                                                                                                                        intensity
+                        Phase
+
+
+
+
+                                          10λ                                                                    10λ
+                             0                                                                                         0
+                                                2
+ Fig. 4 Numerical simulation results of QPI D NNs for all-optical phase recovery through random phase diffusers. a 4-layer QPI D2NN phase
+ recovery results through known and new random diffusers for phase-encoded images selected from the Fashion-MNIST dataset b 10-layer QPI
+ D2NN phase recovery results through known and new random diffusers for phase-encoded images selected from the CIFAR-10 dataset.
+
+
+having ~T/K trainable features)39,44. In fact, for a single-             (Ltrain ) of 10λ, 14λ and 17λ (see the Materials and methods
+layer phase-only diffractive processor, the ballistic photons            section); each one of the resulting QPI D2NN was blindly
+of a visual scene (with lower spatial frequencies) at the                tested with random new phase diffusers with the same
+input of the diffractive processor will directly dominate the            correlation length Ltest = Ltrain . Fig. 7a visualizes the output
+power balance at the output plane, making much weaker                    images of these three QPI networks, revealing that the
+spherical waves that are communicating through the edges                 diffractive networks trained and tested with larger
+of the same diffractive layer negligible in terms of their               correlation length diffusers more accurately reflect the
+contributions to the accuracy of the desired output. This                original phase distribution at the input, which aligns with
+effectively reduces the useful number of diffractive                     the fact that the phase diffusers with larger correlation
+features or degrees of freedom at a single phase-only                    lengths introduce weaker distortions to the input objects.
+diffractive layer for a given optical inference or image                 Fig. 7b, c plot the PCC values and the phase errors of these
+reconstruction task.                                                     three QPI D2NN models for known, forgotten, new and no
+                                                                         diffusers, where the “forgotten” diffusers refer to the
+Impact of the diffuser correlation length (L)                            diffusers used during the training stage before the last
+   We also investigated how the diffusers’ correlation                   epoch, i.e., the random diffusers used from the 1st to the
+length affects the imaging quality. For this analysis, we                199th epoch of our training. We observe that the QPI
+designed three different QPI diffractive networks, each                  performance through the known diffusers used in the final
+trained using random diffusers with a correlation length                 (200th) epoch of the training is slightly better than imaging
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                                                                                                            Page 8 of 16
+
+
+
+
+                          a                                                                                                                         b 1.0
+                                                                                                          QPI diffractive network
+                                                                                                                 (αtrain=1)
+                                                                                                                                                                     0.8
+
+
+
+
+                                                                                                                                                   PCC
+                    Uniform plane wave
+                                                                                                                                                                                                                      New diffusers
+                                                                                                                                                                     0.6
+
+
+
+
+                                                                                         Phase diffuser
+                                                                                                                                                                                                                      No diffusers
+
+
+
+
+                                                                                                                                    Output plane
+                                                                      Phase object
+                                                                                                                                                                           0.1   0.25          0.5            0.75       1             1.25
+                                                                                                                                                                                                     αtest range
+                                                                                                                                                    c
+                                                                                                                                                                                                                     New diffusers
+                                                                                                                                                                     60                                              No diffusers
+
+
+
+
+                                                                                                                                                   Phase error (%)
+                                                                                                                                                                     40
+                                                                       0             αtestπ
+                                                                                                                                                                     20
+
+                                                                                                                                                                           0.1   0.25          0.5            0.75       1             1.25
+                                                                                                                                                                                                     αtest range
+
+                          d                                                          αtest = 1.25                    αtest = 1              αtest = 0.75                         αtest = 0.5         αtest = 0.25        αtest = 0.1
+                                Input
+
+
+                                                                diffuser
+                                                                 New
+                               QPI diffractive network output
+
+
+                                                                diffuser
+                                                                  No
+
+
+
+
+                                                                                                                                                                                                                                  15λ
+
+                                                                            0                               2π 0             1.6π 0           1.2π 0          0.8π 0          0.4π 0         0.16π
+                                                                                     Normalized                    Normalized       Normalized       Normalized      Normalized      Normalized
+                                                                                      intensity                     intensity        intensity        intensity       intensity       intensity
+
+ Fig. 5 The impact of the input phase contrast on the QPI D2NN signal quality. a A schematic of the diffractive QPI network that was trained with
+ αtrain = 1. b The PCC values and c the percent phase errors of the diffractive QPI signals with respect to the ground truth images as a function of
+ αtest . d Pairs of ground truth binary phase-encoded images (top row) and the results of the QPI D2NN imaging through new random diffusers
+ (middle row) and no diffusers (bottom row) for different levels of phase encoding ranges, αtest . L = Ltrain = Ltest = 14λ .
+
+
+through forgotten diffusers or new diffusers, which is                                                                                                                     efficiency of the transmissive layers and the material
+expected due to the partial “memory” of the diffractive QPI                                                                                                                absorption. In this study, we assumed that the absorption of
+network. Another important finding is that the all-optical                                                                                                                 the optical material of the diffractive layers is negligible for
+phase recovery and QPI performance of these trained                                                                                                                        the operating wavelength of interest; this is a valid
+diffractive networks to image test objects through new                                                                                                                     assumption for most materials in the visible band (e.g.,
+random diffusers is comparable to imaging through                                                                                                                          glass and polymers) since the entire axial thickness of a
+forgotten diffusers. Stated differently, from the perspective                                                                                                              QPI D2NN design is <100λ. To control and accordingly
+of the QPI D2NN, a new random phase diffuser is                                                                                                                            enhance the output power efficiency of QPI diffractive
+statistically identical to a forgotten phase diffuser that was                                                                                                             networks, an additional loss function was introduced,
+used during the earlier epochs of the training; in fact, this                                                                                                              which balanced the tradeoff between the QPI performance
+feature can be considered a signature of successful training                                                                                                               and the diffraction efficiency (see the Materials and
+of a diffractive imager network to see through random                                                                                                                      methods section). In Fig. 8, we present two QPI D2NN
+diffusers.                                                                                                                                                                 designs with K=4 and 8 diffractive layers, both sharing the
+                                                                                                                                                                           same parameters as the set-up shown in Fig. 1. Their QPI
+The tradeoff between the QPI quality and the output                                                                                                                        performance through new diffusers and no diffusers are
+diffraction efficiency                                                                                                                                                     also plotted in Fig. 8. For the 4-layer QPI D2NN
+   Two factors mainly influence the output power                                                                                                                           architecture, the previously presented diffractive model that
+efficiency of the presented QPI networks: the diffraction                                                                                                                  was designed without a power-efficiency penalty (Fig. 2)
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                                  Page 9 of 16
+
+
+
+
+                         a                                           Input   Known diffuser          New diffuser           No diffuser
+
+
+
+
+                                             2
+                      Number of layers (K)
+
+
+
+
+                                             4
+
+
+
+                                                                                                                                                1.2π
+
+
+
+
+                                                                                                                                                       Normalized
+                                                                                                                                                        intensity
+                                             6
+
+
+                                                                                                                                          10λ
+                                                                                                                                                0
+                         b                                     1.0
+
+
+
+                                                               0.9
+                                                 PCC
+
+
+
+
+                                                                                                                    Known diffusers
+                                                               0.8                                                  New diffusers
+                                                                                                                    No diffusers
+                                                                        2                        4                                    6
+                                                                                   Number of diffractive layers K
+
+                         c                                                                                          Known diffusers
+                                                               0.4                                                  New diffusers
+                                                                                                                    No diffusers
+                                                 Phase error
+
+
+
+
+                                                               0.3
+
+
+                                                               0.2
+
+
+                                                                        2                        4                                    6
+                                                                                   Number of diffractive layers K
+ Fig. 6 Additional trainable diffractive layers improve the all-optical phase recovery performance for input phase objects imaged through random
+ unknown diffusers. a The output normalized intensity of the same phase object imaged by QPI D2NNs trained with K = 2 , K = 4 , and K = 6
+ diffractive layers through known (2nd column), new (3rd column) and no (4th column) diffusers. b The PCC and c the phase error values (in radians)
+ of the QPI D2NN signals calculated with respect to the ground truth images as a function of the number of diffractive layers K.
+ L = Ltrain = Ltest = 14λ .
+
+
+achieved an output power efficiency of ~0.5% and a PCC                                               As shown in Fig. 8, for the QPI D2NN models with K=8
+value of 0.885 for imaging input objects through new                                                 diffractive layers, the output image quality was further
+random diffusers. By introducing the additional power-                                               improved compared to the 4-layer designs at the same
+efficiency loss term during training, the same QPI D2NN                                              output efficiency performance. In general, a deeper D2NN
+architecture with K=4 achieved an increased output power                                             architecture, such as the 8-layer model, can achieve a better
+efficiency of ~1.86% while maintaining a good output                                                 tradeoff between the output diffraction efficiency and the
+image quality with a PCC of 0.831. Compared to the                                                   QPI performance compared to shallow D2NN models with
+original QPI D2NN design that solely focused on the output                                           fewer layers.
+image quality, the newly trained diffractive network, which
+took into account both the image quality and output power                                            Discussion
+efficiency, improved the diffraction efficiency by ~3-fold,                                             As demonstrated in our numerical results, a QPI D2NN
+with only a minor compromise on the output image quality.                                            trained with the MNIST dataset can all-optically recover
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                                              Page 10 of 16
+
+
+
+
+  a                             New diffusers: Ltrain = Ltest = L                                            a 1.0
+                           L = 10λ        L = 14λ               L = 17λ                                                                                              8 layers
+                                                                                    2π
+                                                                                                                      0.9                                            4 layers
+
+
+
+
+                                                                                                        PCC
+                                                                                                                                                                     8 layers
+                                                                              15λ                                     0.8     New diffusers
+                                                                                    0                                         No diffusers                           4 layers
+                 Input          QPI diffractive network output                                                          0.0      0.5          1.0        1.5        2.0         2.5    3.0
+                                                                                                                                              Diffraction efficiency (%)
+
+                                                                                                            b 0.5             New diffusers                          4 layers
+                                                                                                                              No diffusers
+                                                                                                                      0.4
+
+
+
+
+                                                                                                        Phase error
+                                                                                                                                                                     8 layers
+                                                                                    1.2π
+                                                                                                                      0.3
+
+
+
+
+                                                                                         Normalized
+                                                                                                                                                                     4 layers
+
+
+
+
+                                                                                          intensity
+                                                                                                                      0.2
+                                                                                                                                                                     8 layers
+                                                                              10λ
+                                                                                    0                                   0.0      0.5          1.0        1.5        2.0       2.5      3.0
+  b            1.0                                                                                                                            Diffraction efficiency (%)
+                                                                                                       Fig. 8 The tradeoff between diffractive QPI signal quality and the
+               0.9                                                                                     output power efficiency. a The PCC values and b and the phase
+ PCC
+
+
+
+
+                                                           Known diffusers
+                                                           Forgotten diffusers                         errors (in radians) of the QPI diffractive networks trained with
+               0.8                                         New diffusers
+                                                                                                       various levels of diffraction efficiency penalty. These QPI D2NN
+                                                           No diffusers
+
+                     10λ                    14λ                             17λ                        models were trained using αtrain = 1 phase-encoded input samples
+                               Correlation length L                                                    selected from the MNIST dataset. Two D2NN set-ups using four and
+  c            0.4
+                                                                                                       eight     diffractive      layers were     trained   and    tested.
+                                                                                                       L = Ltrain = Ltest = 14λ .
+ Phase error
+
+
+
+
+               0.2
+                                                      Known diffusers
+                                                      Forgotten diffusers
+                                                      New diffusers
+                                                                                                      specimen hidden by unknown random phase diffusers can
+                                                      No diffusers                                    be performed at the speed of light propagation through a
+               0.0
+                     10λ                    14λ                             17λ
+                                                                                                      thin optical volume that axially spans <100λ.
+                               Correlation length L
+                                                                                                         Noise is a common and unavoidable factor in optical
+ Fig. 7 Quantitative phase imaging through random unknown diffusers
+                                                                                                      systems, often affecting the performance and accuracy of
+ with different correlation lengths L . a Output signal IQPI of the input
+ phase objects imaged by diffractive QPI networks trained with                                        imaging instruments. Therefore, understanding the impact
+ Ltrain = 10λ, 14λ and 17λ diffusers, seen through new random                                         of noise on the QPI diffractive network’s output
+ diffusers (1st row). b The PCC and c the phase error values (in                                      performance is crucial. To shed more light on this, we
+ radians) of the output signals of the QPI diffractive networks trained                               assessed the robustness of the QPI D2NNs trained without
+ with Ltrain = 10λ, 14λ and 17λ , and tested through known, forgotten,
+                                                                                                      noise against various phase noise levels. Specifically, we
+ new and no diffusers with the corresponding correlation length, i.e.,
+ Ltest = Ltrain = L.
+                                                                                                      introduced a random phase noise, nφ , to the object-free
+                                                                                                      regions surrounding the samples of interest, altering its
+                                                                                                      original uniform 0 phase, point by point. The random phase
+the phase information of unknown test objects completely                                              noise nφ follows a uniform distribution [0, φn ] for each
+covered by random unknown diffusers. By using the mean                                                point, with φn being the maximum phase noise ranging
+intensity value surrounding the QPI signal area as a                                                  from 0 to 3π/2 during the testing process, representing
+normalization term, the QPI network becomes invariant to                                              different levels of phase noise. As shown in Fig. 9, the
+changes in the input beam intensity or the power efficiency                                           original QPI diffractive network trained without phase
+of the system, and the resulting normalized intensity                                                 noise exhibits robustness against noise, maintaining
+profiles quantify the phase distribution of the input objects                                         acceptable QPI reconstruction quality within a phase noise
+distorted by random diffusers. Since these QPI diffractive                                            range of [0, 0.5π] even though the model was trained
+networks only consist of passive diffractive layers, they                                             without noise. However, its performance degrades quickly
+perform phase recovery and quantitative phase imaging                                                 when φn > 0.5π . Next, we trained five additional models in
+without needing an external power source except for the                                               which noise was deliberately introduced during the training
+illumination light. Although the training process takes                                               process, with φn = π/4, π/2, 3π/4, π, 5π/4. The image
+relatively long (e.g., ~72 hours), it’s a one-time effort; after                                      reconstruction results of these five models, blindly tested at
+this one-time training and the fabrication of the resulting                                           various phase noise levels, are also reported in Fig. 9,
+diffractive layers, the quantitative phase imaging of                                                 revealing a tradeoff between the image quality and
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                   Page 11 of 16
+
+
+
+
+        1.0                                                                    permissible shift along the corresponding axes during the
+        0.9
+                                                                               training process was selected as ∆ x,tr = ∆y,tr = 0.2mm and
+                                                                               ∆z,tr = 0.375mm (see the Materials and methods section);
+        0.8
+                                                                               accordingly, D x , Dy and Dz followed a uniform distribution
+                                                                                                                               (           )
+  PCC
+
+
+
+
+        0.7                                                       No noise     in the range of U(−∆ x,tr , ∆ x,tr ), U −∆y,tr , ∆y,tr and
+                                                                  [0, 0.25π]
+        0.6                                                       [0, 0.5π]    U(−∆z,tr , ∆z,tr ) , respectively. All other parameters were kept
+                                                                  [0, 0.75π]
+        0.5                                                       [0, π]
+                                                                               the same as the non-vaccinated D2NN setup shown in
+                                                                  [0, 1.25π]   Fig. 1. The QPI performance, in terms of the PCC and the
+        0.4
+              0   0.25π   0.50π   0.75π   1.00π   1.25π   1.50π                phase errors, was evaluated under varying amounts of
+                                     Test noise level                          misalignments, as shown in Fig. 10b-e. For the QPI D2NN
+ Fig. 9 The image reconstruction results of six different QPI D2NNs            trained without any random mechanical shifts (solid line),
+ trained with varying noise levels, with φn = 0, π/4, π/2, 3π/4, π,
+                                                                               the image output quality rapidly declined upon introducing
+ 5π/4 , and blindly tested at various phase noise levels nφ .
+                                                                               random shifts in the positions of the diffractive layers,
+                                                                               especially in the lateral directions. However, the vaccinated
+robustness against noise; the QPI diffractive networks                         QPI D2NN design demonstrated improved resilience to
+trained with noise present relatively worse imaging                            both axial and lateral misalignments, as depicted by the
+performance compared to those trained under noise-free                         dashed lines in Fig. 10b-e, even sustaining a satisfactory
+conditions, but they exhibit a stable reconstruction fidelity                  level of performance when the misalignments introduced
+when blindly tested under different φn levels, presenting                      during the testing stage substantially exceeded those
+resilience against random phase noise.                                         applied during the training. These analyses confirm the
+   Note that conventional QPI systems are relatively bulky                     effectiveness of the vaccination strategy against potential
+and need additional digital processing and algorithms to                       misalignments and fabrication imperfections, providing a
+retrieve the phase information of each sample from the                         practical solution to implement QPI D2NN designs
+captured images, which can be time-consuming; this digital                     experimentally.
+computing step is needed for each sample of interest.                             In addition to such training approaches that can build
+Although the implementation of these phase retrieval                           experimental resilience for fabricated diffractive networks,
+methods using convolutional deep neural networks6,21 can                       high-resolution fabrication techniques, such as optical
+considerably accelerate the reconstruction speed per object,                   lithography,          two-photon     polymerization-based        3D
+this digital computation adds an extra step besides signal                     printing46, electron beam lithography47 and other emerging
+acquisition. The QPI diffractive networks, on the other                        approaches48 could also be used to fabricate diffractive QPI
+hand, can complete the phase image reconstruction (even                        networks that operate at shorter wavelengths, such as the
+through unknown random diffusers) as the input light                           infrared or visible part of the spectrum.
+propagates from the objects onto the sensor over a thin                           Another important point that is worth emphasizing is
+diffractive volume that axially spans ~70λ . In other words,                   that, while a coherent diffractive neural network is a linear
+the signal captured by the sensor already represents the                       optical processor for complex fields, the trained QPI
+QPI reconstruction result, eliminating the need for further                    diffractive network approximates a nonlinear operation
+computation of the solution for the inverse problem.                           applied on the input optical fields (phase-only objects in
+   Despite their advantages, the implementation of QPI                         this case, i.e., e j∅). Specifically, the intensity (I) of the field
+D2NNs remains challenging due to the requirement of high-                      at the output region of interest of the QPI diffractive
+resolution 3D fabrication and alignment, which becomes                         network is proportional to the phase (∅) of the input object,
+more critical when operating at shorter wavelengths. One                       i.e., I = |D (input)|2 ∝ ∅, where D is the forward operation
+way to partially mitigate potential misalignments and                          performed by the trained QPI D2NN, acting on the input
+fabrication imperfections in the experiments is to employ a                    field. This phase-to-intensity transformation approximated
+“vaccination” strategy, which deliberately incorporates,                       by the QPI diffractive network represents a nonlinear
+during the training stage, random 3D displacements or                          operation applied to the optical input fields46.
+imperfections into the diffractive layers45. To demonstrate                       Although we considered here random diffusers as single-
+the impact of vaccination for QPI through random                               layer thin phase elements, which is a common assumption
+diffusers, we introduced a uniformly distributed random                        in various applications17,49–51, an extension of this QPI D2NN
+                              (         )
+3D displacement vector,D = D x , Dy , Dz , and designed a 4-                   concept for imaging through volumetric diffusers is left as
+                           2
+layer vaccinated QPI D NN with a correlation length of                         future work, which might find broader applications52,53. For
+L = Ltrain = Ltest = 14λ ; see Fig. 10. The maximum                            example, the design of a hybrid system, which jointly
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                                                 Page 12 of 16
+
+
+
+
+       a                                                                                 ctive n
+                                                                                                e   twork                                      Output
+                                                                                Diffra                                                                  plane
+
+
+                                                  Phase
+                                 Input p                  diffuse                                                                                               π
+                                        lane                      r        Dx
+                                                                                                                                                                0
+
+                                                                                  Dy
+                                                                                                                                                 z2 ± Dz
+
+                                                                                                                               2π
+                                                                                                                                          y
+                                            15λ                                              z1 ± Dz                           0                  z
+                                                                    2π     z1 ± Dz                                                                x
+                                                                    0
+       b               1.0                                                                             d                 1.0
+                                                                                                                                                                         w/ vaccination
+                       0.8                                                                                               0.8
+     PCC
+
+
+
+
+                                                                                                       PCC
+                                                                                                                         0.6
+                       0.6
+
+                                                                         New diffusers                                   0.4        New diffusers
+                       0.4                                                                                                                        w/o vaccination
+                                                                         No diffusers                                               No diffusers
+                                                                                                                         0.2
+                             0   0.25          0.50        0.75            1.00             1.25                               0                         0.25                         0.50
+                                           Axial misalignment (λ)                                                                             Lateral misalignment (λ)
+       c               25                                                                              e                 30
+                                                                                                                                                                           New diffusers
+                                                                         New diffusers
+                                                                         No diffusers                                                                                      No diffusers
+     Phase error (%)
+
+
+
+
+                                                                                                       Phase error (%)
+
+
+
+
+                                                                                                                         20
+                       15
+
+
+                                                                                                                         10
+                        5
+                             0   0.25          0.50        0.75            1.00             1.25                               0                         0.25                         0.50
+                                           Axial misalignment (λ)                                                                             Lateral misalignment (λ)
+ Fig. 10 Vaccinated QPI diffractive neural networks. a A schematic of the diffractive layer misalignment. b The PCC values and c the percent
+ phase errors of the QPI diffractive networks trained with or without vaccination, and tested with different levels of axial misalignments. d The
+ PCC values and e the percent phase errors of the QPI diffractive networks trained with or without vaccination, and tested with different levels of
+ lateral misalignments. These QPI D2NN models were trained using αtrain = 1 phase-encoded input samples selected from the MNIST dataset.
+ L = Ltrain = Ltest = 14λ .
+
+
+trains a front-end diffractive network and a back-end                                                     as
+electronic neural network34,36,54 may be used to boost the                                                                              D (x, y) = W (x, y) ∗ K (σ)                          (2)
+performance of QPI through more complicated volumetric                                                    where W (x, y) follows a normal distribution with a mean µ
+random diffusers. Finally, our results and methods can be                                                 and a standard deviation σ0, i.e.
+extended to operate at various parts of the electromagnetic                                                                                 (     )
+spectrum, including the visible and infrared wavelengths.                                                                     W (x, y) ∼ N µ, σ20                (3)
+                                                                                                             K (σ) is a zero-mean Gaussian smoothing kernel with a
+Materials and methods                                                                                     standard deviation of σ, and ‘ ∗ ’ denotes the 2D
+                                                                                                          convolution operation. The phase-autocorrelation function
+The design of the random phase diffusers                                                                  Rd (x, y) of a random phase diffuser is related to the
+  We modeled a random phase diffuser as a phase-only                                                      correlation length L as:
+mask, whose complex transmission coefficient tD (x, y) is                                                                                ( (         ) )
+                                                                                                                         Rd (x, y) = exp −π x2 + y2 /L2               (4)
+defined by the refractive index difference between the air                                                                                              ( ( 2 2) 2)
+and the diffuser material (∆n ≈ 0.74 ) and a random                                                          By numerically fitting the function exp −π x + y /L
+heightmap D (x, y) at the diffuser plane, i.e.,                                                           to Rd (x, y), we can statistically get the correlation length L
+                              (                 )                                                         of randomly generated diffusers. In this work, for µ = 25λ ,
+                                2π∆n
+              tD (x, y) = exp j       D (x, y)        (1)                                                 σ0 = 8λ and σ = 7λ, we calculated the average correlation
+                                  λ
+          √                                                                                               length as L ∼ 14λ based on 2000 randomly generated phase
+where j = −1 . The random height map D (x, y) is defined                                                  diffusers. We accordingly modified the σ values to
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                              Page 13 of 16
+
+
+
+
+generate the corresponding random phase diffusers for the                     168×168 using ‘nearest’ mode, then padded with zeros to
+other correlation lengths used in this work.                                  240×240 pixels (φi ), matching the size of the input FOV.
+                                                                              Stated differently, without loss of generality, we defined an
+Optical forward model of the QPI D2NN                                         object-free region with a constant transmission coefficient
+   Free space propagation in air between the diffractive                      of 1 to surround the samples of interest. The values of the
+layers was formulated using the Rayleigh-Sommerfeld                           padded images φi (x, y) were used to define the input phase
+equation. The propagation can be modeled as a shift-                          values, and the amplitude at each pixel was taken as 1.
+invariant linear system with the impulse response:                            Another parameter (α ) was introduced to control the range
+                                 (              )     (        )              of the input phase; accordingly, the complex amplitude at
+                              z      1      1           j2πr
+              w (x, y, z) = 2            +        exp                (5)      the input FOV can be expressed as input = e jαπφi with a size
+                              r 2πr2 jλ                   λ
+               √                                                              of 240×240 pixels, and the target (ground truth) output
+where r = x2 + y2 + z2 and n = 1 for air. Considering a                       intensity is Itarget = απφtarget with a size of 14×14 pixels.
+plane wave that is incident at a phase-modulated object                          The physical size of each diffractive layer was also set to
+h (x, y, z = 0) positioned at z = 0 , we formulated the                       be 96λ × 96λ , i.e., each diffractive layer contained
+distorted image right after the random phase diffuser                         240×240 trainable diffractive features, which only
+located at z0 as:                                                             modulated the phase of the incident light field. The axial
+                                       [                           ]
+           u0 (x, y, z0 ) = tD (x, y) · h (x, y, 0) ∗ w (x, y, z0 )  (6)      distances between the input phase object and the random
+This distorted field is used as the input field of subsequent                 diffuser, the diffuser and first diffractive layer, two
+diffractive layers. The diffractive layers were modeled as                    successive diffractive layers, and the last diffractive layer
+thin phase elements. Consequently, the transmission                           and the output plane were set to be 53.3λ, 2.67λ, 2.67λ and
+coefficient of the layer m located at z = zm can be                           9.3λ, respectively. The size of the signal area at the output
+formulated as:                                                                plane, including the reference region, was set to be
+                        tm = exp ( jφ (x, y, zm ))                     (7)    69.6λ × 69.6λ (174×174 pixels), in which we cropped the
+                                                                              central 67.2λ × 67.2λ (168×168 pixels) region as the QPI
+                                                           th
+The optical field um (x, y, zm ) right after the m diffractive                signal area and the edge region extending (in both
+layer at z = zm can be written as:                                            directions on x and y axes) by 3 pixels was set as the
+                                    [                                   ]
+   um (x, y, zm ) = tm (x, y, zm ) · um−1 (x, y, zm−1 ) ∗w (x, y, ∆zm )       reference region. According to our forward model, the QPI
+                                                                        (8)   signal IQPI (x, y) can be written as:
+where ∆zm = zm − zm−1 is the axial distance between two                                                           Iraw (x, y)
+successive diffractive layers, which was selected as 2.67λ                                        IQPI (x, y) =                         (10)
+                                                                                                                     Re f
+throughout this paper. After being modulated by all the K
+                                                                              where Re f is the mean background intensity value within
+diffractive layers, the optical field was collected at an
+                                                                              the reference region at the output plane, and IQPI (x, y)
+output plane which was ∆zd = 9.3λ away from the last
+                                                                              indicates the quantitative phase image in radians. We
+diffractive layer. The intensity of this optical field is used
+                                                                              further cropped the central 168×168 pixels of IQPI and
+as the raw output of the QPI D2NN:
+                                                                              binned every 12×12 pixels to one pixel by averaging such
+                  Iraw (x, y) = |uM ∗ w (x, y, ∆zd )|2                 (9)    that IQPI had a final size of 14×14 pixels representing the
+                                                                              input object phase in radians.
+The design of QPI diffractive networks                                           During the training, n uniquely different phase diffusers
+   During the training process of QPI D2NNs, we sampled                       were randomly generated at each epoch. In each training
+the 2D space with a grid of 0.4λ , which is also the size of                  iteration, a batch of B = 10 different objects from the
+each diffractive feature on the diffractive layer. A coherent                 MNIST handwritten digit dataset were sampled randomly;
+light was assumed as the illumination source for the                          each input object in a batch was numerically duplicated n
+diffractive neural networks with a wavelength of                              times and separately perturbed by a set of n randomly
+λ ≈ 0.75mm. As for the physical layout of the QPI D2NN,                       selected diffusers. Therefore, B × n different optical fields
+the input field-of-view (FOV) was set to be 96λ × 96λ ,                       were obtained, and these distorted fields were individually
+which corresponds to 240×240 pixels defining the phase                        forward propagated through the same state of the
+distribution of the input objects. Handwritten digits from                    diffractive network. Therefore, we got B × n different
+the MNIST training dataset were first normalized to the                       normalized intensity patterns at the output plane
+range [0, 1] and bilinearly interpolated from 28×28 pixels                    (IQPI_1 , . . . , IQPI_Bn), which were used for the mean square
+to 14×14 (φtarget ). The resulting images were up-sampled to                  error (MSE)-based training loss function calculation:
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                          Page 14 of 16
+
+
+
+
+               1 ∑Bn ∑                                    2               D2NN Vaccination
+                           Itarget (x, y) − IQPI_i (x, y)
+              NQPI i=1
+                       x,y
+                                                                             To assess the effectiveness of the vaccination strategy
+    Loss =                                                       (11)     against the negative impact of potential fabrication
+                                   Bn
+                                                                          inaccuracies and mechanical misalignments, we trained a
+where NQPI = 14 × 14.
+                                                                          QPI D2NN while intentionally introducing random
+  Pearson Correlation Coefficient (PCC) was used to
+                                                                          displacements during the training stage. Specifically, a
+evaluate the linear correlation between the output QPI                                                    (       )
+                                                                          random lateral displacement D x , Dy was added to the
+image IQPI (x, y) and the target Itarget (x, y), which can be
+                                                                          diffractive layer positions, where D x and Dy were randomly
+expressed as:
+             ∑(                      ) (                        )         and independently sampled, i.e.,
+                  IQPI (x, y) − IQPI · Itarget (x, y) − Itarget
+   PCC = √∑ (                        )2 (                         )2          D x ∼ U (−0.2 mm, 0.2 mm) , Dy ∼ U (−0.2 mm, 0.2 mm)
+                   IQPI (x, y) − IQPI · Itarget (x, y) − Itarget                                                                (18)
+                                                                   (12)
+                                                                          where D x and Dy are not necessarily equal to each other in
+  We also calculated the absolute phase error to assess the               each misalignment step. Additionally, a random axial
+phase recovery performance of a QPI D2NN:                                 displacement Dz was also added to the axial distance
+                    1 ∑                                                   between any two successive planes after the diffuser,
+    phase error =           Itarget (x, y) − IQPI (x, y) (13)
+                   NQPI x,y                                               including the distances between the diffuser and the first
+                                                                          diffractive layer, between two successive diffractive layers,
+while the percent phase error is:                                         and from the last diffractive layer to the output plane. Dz
+                         1 ∑ Itarget (x, y) − IQPI (x, y)
+                                                                          was also randomly sampled:
+   phase error% =                                                (14)
+                        NQPI x,y      Itarget (x, y)                                          Dz ∼ U (−0.375 mm, 0.375 mm)                          (19)
+
+   In analyzing the impact of reduced input phase contrast
+on the QPI performance, we trained a QPI D2NN using the                   Digital implementation
+MNIST dataset and tested it with binary gratings and                        The QPI diffractive neural networks were trained using
+handwritten digits. We binarized the MNIST samples by                     Python (v3.6.13) and PyTorch (v1.11, Meta AI) with a
+setting a threshold of 0.5 during the testing stage. In the               GeForce GTX 1 080 Ti graphical processing unit (GPU,
+exploration of the tradeoff between the QPI performance                   Nvidia Corp.), an Intel® Core™ i7-7700K central
+and the output diffraction efficiency, we calculated the                  processing unit (CPU, Intel Corp.) and 64 GB of RAM,
+power-efficiency E (Iraw ) of the QPI D2NN as:                            running the Windows 10 operating system (Microsoft
+                     ∑                  ∑                                 Corp.). The calculated loss values were backpropagated to
+                         Iraw (x, y)      Iraw (x, y)
+         E (Iraw ) = ∑                =                (15)               update the diffractive layer transmission values using the
+                       |input (x, y)|     2402                            Adam optimizer55 with a decaying learning rate of
+                                                                          0.99epoch × 10−3 , where epoch refers to the current epoch
+and the corresponding diffraction efficiency penalty was                  number. Training a typical QPI D2NN model takes ~72 h to
+calculated as follows:                                                    complete with 200 epochs and n = 20 diffusers per epoch.
+                                 {                      }
+          Losse f f (Iraw ) = max 0, Etarget − E (Iraw )  (16)
+                                                                          Acknowledgements
+where Etarget was the target power-efficiency, which varied               The Ozcan Research Group at UCLA acknowledges the support of the
+from 0 to 0.03 for the models presented in Fig. 8; the                    US Office of Naval Research (ONR).
+
+diffractive model presented in Fig. 2 was trained without
+                                                                          Author details
+any diffraction efficiency penalty. Based on these                        1
+                                                                           Electrical   and   Computer     Engineering    Department,       University   of
+definitions, the total loss function that included the power-             California,   Los    Angeles,   California   90095,   USA.    2
+                                                                                                                                         Bioengineering
+efficiency penalty can be rewritten as:                                   Department, University of California, Los Angeles, California 90095, USA.
+
+              1 ∑Bn ∑
+                                                                          3
+                                                                           California NanoSystems Institute (CNSI), University of California, Los
+                                                             2
+                              Itarget (x, y) − IQPI_i (x, y)              Angeles, California 90095, USA
+            NQPI     i=1
+                         x,y
+    Loss =                                                     +          Author contributions
+                                  Bn
+           ∑Bn         {                 (      )}                        Y.L. performed the design of the diffractive systems and conducted the
+                   max 0, Etarget − E Iraw_i                              analysis and discussion of the results. Y.L. designed the diffusers. D.M.
+               i=1
+                                                                 (17)     and B.B. contributed to the analysis. Y.L. and A.O. wrote the manuscript.
+                             Bn                                           A.O. initiated and supervised the project.
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                  Page 15 of 16
+
+
+
+
+Data availability                                                                        Optics Express 6, 72-85 (2015).
+All the data and methods needed to evaluate the conclusions of this                19.   Kollarova, V. et al. Quantitative phase imaging through scattering
+work are present in the main text. The deep learning models reported                     media by means of coherence-controlled holographic microscope.
+in this work used standard libraries and scripts that are publicly                       Journal of Biomedical Optics 20, 111206 (2015).
+available in PyTorch. Additional data can be requested from the
+                                                                                   20.   Qiao, H. et al. GPU-based deep convolutional neural network for
+corresponding author.
+                                                                                         tomographic phase microscopy with ℓ1 fitting and regularization.
+                                                                                         Journal of Biomedical Optics 23, 066003 (2018).
+Conflict of interest                                                               21.   Barbastathis, G., Ozcan, A. & Situ, G. H. On the use of deep learning for
+The authors declare no competing interests.                                              computational imaging. Optica 6, 921-943 (2019).
+                                                                                   22.   Jiang, S. W. et al. Solving Fourier ptychographic imaging problems via
+Received: 19 January 2023 Revised: 17 June 2023 Accepted: 20 June 2023                   neural network modeling and TensorFlow. Biomedical Optics Express
+Accepted article preview online: 25 June 2023                                             9, 3306-3319 (2018).
+Published online: 22 July 2023                                                     23.   Nguyen, T. et al. Convolutional neural network for Fourier
+                                                                                         ptychography video reconstruction: learning temporal dynamics from
+                                                                                         spatial ensembles. (2018). at https://www.semanticscholar.org/
+References                                                                               paper/Convolutional-neural-network-for-Fourier-video-from-Nguyen-
+                                                                                         Xue/5295853f8db15f04fce75920a7f7f9d68033d569 URL.
+  1.   Gabor, D. A new microscopic principle. Nature 161, 777-778 (1948).
+                                                                                   24.   Shen, D. G., Wu, G. R. & Suk, H. I. Deep learning in medical image
+  2.   Huang, D. et al. Optical coherence tomography. Science 254, 1178-
+                                                                                         analysis. Annual Review of Biomedical Engineering 19, 221-248 (2017).
+       1181 (1991).
+                                                                                   25.   Wu, Y. C. et al. Extended depth-of-field in holographic imaging using
+  3.   Cuche, E., Bevilacqua, F. & Depeursinge, C. Digital holography for
+                                                                                         deep-learning-based autofocusing and phase recovery. Optica 5, 704-
+       quantitative phase-contrast imaging. Optics Letters 24, 291-293
+                                                                                         710 (2018).
+       (1999).
+                                                                                   26.   Wu, Y. C. et al. Bright-field holography: cross-modality deep learning
+  4.   Joo, C. et al. Spectral-domain optical coherence phase microscopy for
+       quantitative phase-contrast imaging. Optics Letters 30, 2131-2133                 enables snapshot 3D imaging with bright-field contrast using a single
+       (2005).                                                                           hologram. Light:Science & Applications 8, 25 (2019).
+  5.   Nguyen, T. H. et al. Gradient light interference microscopy for 3D          27.   Ren, Z. B., Xu, Z. M. & Lam, E. Y. M. End-to-end deep learning framework
+       imaging of unlabeled specimens. Nature Communications 8, 210                      for digital holographic reconstruction. Advanced Photonics 1, 016004
+       (2017).                                                                           (2019).
+  6.   Rivenson, Y. et al. Phase recovery and holographic image                    28.   Kamilov, U. S. et al. Learning approach to optical tomography. Optica
+       reconstruction using deep learning in neural networks. Light:Science &             2, 517-522 (2015).
+       Applications 7, 17141 (2018).                                               29.   Goy, A. et al. High-resolution limited-angle phase tomography of
+  7.   Kumar, V. , Abbas, A. & Aster, J. C. Robbins & Cotran Pathologic Basis of         dense layered objects using deep neural networks. Proceedings of the
+       Disease. (Amsterdam: Elsevier, 2014).                                             National Academy of Sciences of the United States of America 116,
+  8.   Lichtman, J. W. & Conchello, J. A. Fluorescence microscopy. Nature                19848-19856 (2019).
+       Methods 2, 910-919 (2005).                                                  30.   Bianco, V. et al. Real-time FPM reconstruction and misalignment
+  9.   Lang, W. Nomarski Differential Interference-Contrast Microscopy.                  correction by numerical Multi-Look and GAN. Computational Optical
+       (Oberkochen: Carl Zeiss, 1982).                                                   Sensing and Imaging 2022. Vancouver, British Columbia, Canada:
+10.    Arnison, M. R. et al. Linear phase imaging using differential                     Optica Publishing Group, 2022, CTh3C. 4.
+       interference contrast microscopy. Journal of Microscopy 214, 7-12           31.   Xue, Y. J. et al. Reliable deep-learning-based phase imaging with
+       (2004).                                                                           uncertainty quantification. Optica 6, 618-629 (2019).
+11.    Park, Y., Depeursinge, C. & Popescu, G. Quantitative phase imaging in       32.   Mengu, D. & Ozcan, A. All-optical phase recovery: diffractive
+       biomedicine. Nature Photonics 12, 578-589 (2018).                                 computing for quantitative phase imaging. Advanced Optical Materials
+12.    Popescu, G. et al. Fourier phase microscopy for investigation of                   10, 2200281 (2022).
+       biological structures and dynamics. Optics Letters 29, 2503-2505            33.   Lin, X. et al. All-optical machine learning using diffractive deep neural
+       (2004).                                                                           networks. Science 361, 1004-1008 (2018).
+13.    Marquet, P. et al. Digital holographic microscopy: a noninvasive            34.   Mengu, D. et al. Analysis of diffractive optical neural networks and their
+       contrast imaging technique allowing quantitative visualization of                 integration with electronic neural networks. IEEE Journal of Selected
+       living cells with subwavelength axial accuracy. Optics Letters 30, 468-           Topics in Quantum Electronics 26, 3700114 (2020).
+       470 (2005).                                                                 35.   Luo, Y. et al. Design of task-specific optical systems using broadband
+14.    Wu, Y. C. & Ozcan, A. Lensless digital holographic microscopy and its             diffractive neural networks. Light:Science & Applications 8, 112 (2019).
+       applications in biomedicine and environmental monitoring. Methods           36.   Li, J. X. et al. Spectrally encoded single-pixel machine vision using
+        136, 4-16 (2018).                                                                diffractive networks. Science Advances 7, eabd7690 (2021).
+15.    Popescu, G. et al. Diffraction phase microscopy for quantifying cell        37.   Veli, M. et al. Terahertz pulse shaping using diffractive surfaces. Nature
+       structure and dynamics. Optics Letters 31, 775-777 (2006).                        Communications 12, 37 (2021).
+16.    Wang, Z. et al. Spatial light interference microscopy (SLIM). Optics        38.   Işil, C. et al. Super-resolution image display using diffractive decoders.
+       Express 19, 1016-1026 (2011).                                                     Science Advances 8, eadd3433 (2022).
+17.    Ji, N., Milkie, D. E. & Betzig, E. Adaptive optics via pupil segmentation   39.   Kulce, O. et al. All-optical synthesis of an arbitrary linear transformation
+       for high-resolution imaging in biological tissues. Nature Methods 7,              using diffractive surfaces. Light:Science & Applications 10, 196 (2021).
+       141-147 (2010).                                                             40.   Kulce, O. et al. All-optical information-processing capacity of diffractive
+18.    Jang, M. et al. Relation between speckle decorrelation and optical                surfaces. Light:Science & Applications 10, 25 (2021).
+       phase conjugation (OPC)-based turbidity suppression through                 41.   Sakib Rahman, M. S. & Ozcan, A. Computer-free, all-optical
+       dynamic scattering media: a study on in vivo mouse skin. Biomedical               reconstruction of holograms using diffractive networks. ACS Photonics
+Li et al. Light: Advanced Manufacturing (2023)4:17                                                                                                 Page 16 of 16
+
+
+
+
+       8, 3375-3384 (2021).                                                                (2018).
+42.   Li, Y. H. et al. Analysis of diffractive neural networks for seeing through    49.   Li, S. et al. Imaging through glass diffusers using densely connected
+      random diffusers. IEEE Journal of Selected Topics in Quantum Electronics             convolutional networks. Optica 5, 803 (2018).
+       29, 7600117 (2023).                                                           50.   Wu, T. F. et al. Imaging through a thin scattering layer and jointly
+43.   Lin, X. et al. All-optical machine learning using diffractive deep neural            retrieving the point-spread-function using phase-diversity. Optics
+      networks, supplementary materials. Science 361, 1004-1008 (2018).                    Express 25, 27182-27194 (2017).
+44.   Rahman, M. S. S. et al. Universal linear intensity transformations using       51.   Xu, X. Q. et al. Imaging of objects through a thin scattering layer using
+      spatially-incoherent          diffractive      processors.      Print     at         a spectrally and spatially separated reference. Optics Express 26,
+      https://arxiv.org/abs/2303.13037 (2023).                                             15073-15083 (2018).
+45.   Mengu, D. et al. Misalignment resilient diffractive optical networks.          52.   Satat, G. et al. All photons imaging through volumetric scattering.
+      Nanophotonics 9, 4207-4219 (2020).                                                   Scientific Reports 6, 33946 (2016).
+46.   Bai, B. J. et al. Data class-specific all-optical transformations and          53.   Katz, O. et al. Non-invasive single-shot imaging through scattering
+      encryption. Advanced Materials (in the press).                                       layers and around corners via speckle correlations. Nature Photonics 8,
+47.   Semple, N. & Iyer, A. K. Electron-beam lithography fabrication process               784-790 (2014).
+      development for a Mid-IR plasmonic metasurface with fine features.             54.   Mengu, D. et al. Classification and reconstruction of spatially
+      2020 Fourteenth International Congress on Artificial Materials for                   overlapping phase images using diffractive optical networks. Scientific
+      Novel Wave Phenomena (Metamaterials). New York, NY, USA: IEEE,                       Reports 12, 8446 (2022).
+      2020, 511-513.                                                                 55.   Kingma, D. P. & Ba, J. Adam: a method for stochastic optimization.
+48.   Oran, D. et al. 3D nanofabrication by volumetric deposition and                      Proceedings of the 3rd International Conference on Learning
+      controlled shrinkage of patterned scaffolds. Science 362, 1281-1285                  Representations. San Diego, CA, USA, 2015.
+
