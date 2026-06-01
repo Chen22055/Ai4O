@@ -50,10 +50,10 @@
   - Propagate to far field or lens focal plane.
   - Compare measured diffraction peak positions with `sin(theta_m) = m * lambda / d`.
 
-- [ ] Implement `configs/validate_lens.yaml`.
+- [x] Implement `configs/validate_lens.yaml`.
   - Wavelength, grid size, object distance, lens focal length, image distance.
 
-- [ ] Implement `experiments/run_validation_lens.py`.
+- [x] Implement `experiments/run_validation_lens.py`.
   - Simulate thin-lens focusing and simple imaging.
   - Verify focal spot and thin-lens equation `1/f = 1/u + 1/v`.
 

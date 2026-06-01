@@ -1,2 +1,30 @@
-# 本配置文件用于透镜成像/聚焦验证实验。
-# 后续应在这里填写波长、采样网格、透镜焦距、物距、像距和输出路径等参数。
+# 本配置文件用于透镜聚焦与圆孔衍射 Airy pattern 验证实验。
+# 光路顺序在 run_validation_lens.py 中构造为：
+# plane wave -> circular aperture -> thin lens -> free-space propagation to focal plane -> camera/intensity output
+
+simulation:
+  name: airy_lens_validation
+  wavelength: 5.32e-7        # meter, 532 nm
+
+grid:
+  shape: [512, 512]          # [ny, nx]
+  pixel_pitch: 6.4e-6        # meter
+
+aperture:
+  radius: 2.0e-4             # meter. Diameter D = 0.4 mm.
+
+lens:
+  focal_length: 5.0e-2       # meter
+
+propagation:
+  distance: 5.0e-2           # meter. Equal to focal_length for focal-plane Airy pattern.
+  method: angular_spectrum
+
+analysis:
+  radial_max_radius: 2.2e-4  # meter
+  crop_half_width: 2.5e-4    # meter
+
+output:
+  directory: OpticsSimulation/outputs/figures/lens_validation
+  prefix: airy_lens_validation
+  dpi: 200
