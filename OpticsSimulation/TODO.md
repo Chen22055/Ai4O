@@ -25,7 +25,7 @@
 - [x] Implement `optics/propagation.py`.
   - Start with angular spectrum propagation.
   - Add Fresnel FFT propagation.
-  - [ ] Add Rayleigh-Sommerfeld propagation or a compatibility implementation based on the Matlab reference code.
+  - [x] Add Rayleigh-Sommerfeld propagation or a compatibility implementation based on the Matlab reference code.
   - [ ] Include sampling and aliasing checks.
 
 - [x] Implement `optics/elements.py`.
@@ -42,10 +42,10 @@
 
 ## Phase 2: Physical Validation
 
-- [ ] Implement `configs/validate_grating.yaml`.
+- [x] Implement `configs/validate_grating.yaml`.
   - Wavelength, grid size, pixel pitch, grating period, propagation distance, expected diffraction orders.
 
-- [ ] Implement `experiments/run_validation_grating.py`.
+- [x] Implement `experiments/run_validation_grating.py`.
   - Generate a binary or sinusoidal grating.
   - Propagate to far field or lens focal plane.
   - Compare measured diffraction peak positions with `sin(theta_m) = m * lambda / d`.

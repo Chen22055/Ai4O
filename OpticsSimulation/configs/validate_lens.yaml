@@ -1,4 +1,4 @@
-# 本配置文件用于透镜聚焦与圆孔衍射 Airy pattern 验证实验。
+﻿# 本配置文件用于透镜聚焦与圆孔衍射 Airy pattern 验证实验。
 # 光路顺序在 run_validation_lens.py 中构造为：
 # plane wave -> circular aperture -> thin lens -> free-space propagation to focal plane -> camera/intensity output
 
@@ -18,7 +18,9 @@ lens:
 
 propagation:
   distance: 5.0e-2           # meter. Equal to focal_length for focal-plane Airy pattern.
-  method: angular_spectrum
+  # Available methods: angular_spectrum, fresnel, rayleigh_sommerfeld.
+  # Rayleigh-Sommerfeld is implemented by FFT-based linear convolution and is slower.
+  method: rayleigh_sommerfeld
 
 analysis:
   radial_max_radius: 2.2e-4  # meter

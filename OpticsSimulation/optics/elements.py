@@ -112,3 +112,26 @@ class BinaryAmplitudeGrating:
         normalized = np.mod(coord, self.period) / self.period
         mask = normalized < self.duty_cycle
         return field.with_data(field.data * mask)
+
+
+@dataclass(frozen=True)
+class SinusoidalPhaseGrating:
+    """一维正弦相位光栅。
+
+    period 为光栅周期，phase_depth 为峰值相位调制深度，单位 rad。
+    orientation 可选 "x" 或 "y"，表示沿哪个坐标方向周期变化。
+    """
+
+    period: float
+    phase_depth: float
+    orientation: str = "x"
+
+    def apply(self, field: Field) -> Field:
+        if self.period <= 0:
+            raise ValueError("period must be positive")
+        if self.orientation not in {"x", "y"}:
+            raise ValueError("orientation must be 'x' or 'y'")
+
+        coord = field.grid.X if self.orientation == "x" else field.grid.Y
+        phase = self.phase_depth * np.sin(2.0 * np.pi * coord / self.period)
+        return field.with_data(field.data * np.exp(1j * phase))
